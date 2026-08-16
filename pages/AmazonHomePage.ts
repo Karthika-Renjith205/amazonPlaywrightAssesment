@@ -15,14 +15,15 @@ export class AmazonHomePage extends BasePage {
   readonly searchbutton: Locator;
 
   constructor(page: Page) {
-  super(page);
-  this.amazonLogo = page.locator('a[aria-label*="Amazon"]');
-  this.searchBox = page.locator('#twotabsearchtextbox');
-  this.signInLink = page.locator('#nav-link-accountList');
-  this.cartLink = page.locator('#nav-cart');
-  this.navButton = page.locator('#nav-hamburger-menu, #nav-main .hm-icon');
-  this.searchbutton = page.locator('#nav-search-submit-button');
-}
+    super(page);
+    // Initialize locators using getByRole for accessibility
+    this.amazonLogo = page.getByRole('link', { name: 'Amazon.com.au' });
+    this.searchBox = page.getByRole('searchbox', { name: /search amazon/i });
+    this.signInLink = page.locator('#nav-link-accountList');
+    this.cartLink = page.getByRole('link', { name: /shopping basket/i });
+    this.navButton = page.getByRole('button', { name: 'Open All Categories Menu' });
+    this.searchbutton = page.locator('#nav-search-submit-button');
+  }
 
   /**
    * Navigate to Amazon home page
@@ -36,11 +37,11 @@ export class AmazonHomePage extends BasePage {
    */
   async verifyKeyNavigationElements() {
     // Verify Amazon logo
-    await expect(this.amazonLogo).toBeVisible({ timeout: 15000 });
+    await expect(this.amazonLogo).toBeVisible();
     console.log('✓ Amazon logo is visible');
 
     // Verify search box
-    await expect(this.searchBox).toBeVisible({ timeout: 15000 });
+    await expect(this.searchBox).toBeVisible();
     console.log('✓ Search box is visible');
 
     // Verify sign in link
@@ -48,15 +49,15 @@ export class AmazonHomePage extends BasePage {
     console.log('✓ Sign in link is visible');
 
     // Verify cart link
-    await expect(this.cartLink).toBeVisible({ timeout: 15000 });
+    await expect(this.cartLink).toBeVisible();
     console.log('✓ Cart link is visible');
 
     // Verify navigation menu button
-    await expect(this.navButton).toBeVisible({ timeout: 15000 });
+    await expect(this.navButton).toBeVisible({ timeout: 5000 });
     console.log('✓ Navigation menu button is visible');
 
     // Verify page title
-    await expect(this.page).toHaveTitle(/Amazon/i);
+    await expect(this.page).toHaveTitle(/Amazon/);
     console.log('✓ Page title contains "Amazon"');
   }
 
@@ -64,9 +65,9 @@ export class AmazonHomePage extends BasePage {
    * Open the navigation menu
    */
   async openNavigationMenu() {
-    // Wait for the nav button to be visible and enabled before clicking
-    await expect(this.navButton).toBeVisible({ timeout: 15000 });
-    await expect(this.navButton).toBeEnabled({ timeout: 15000 });
+    // Wait for the nav JS to hydrate so the hamburger button's click handler is attached
+    await this.page.waitForLoadState('domcontentloaded');
+    await expect(this.navButton).toBeVisible();
     await this.navButton.click();
     console.log('✓ Navigation menu button clicked');
   }
@@ -85,14 +86,13 @@ export class AmazonHomePage extends BasePage {
    * Navigate to a category
    */
   async navigateToCategory(categoryName: string) {
-    await this.page.waitForLoadState('domcontentloaded');
-    const categoryLink = this.page.getByRole('link', {
-      name: categoryName,
-      exact: true
-    });
-    await categoryLink.scrollIntoViewIfNeeded();
-    await expect(categoryLink).toBeVisible();
-    await categoryLink.click();
+  const categoryLink = this.page.getByRole('link', {
+    name: categoryName,
+    exact: true
+  });
+
+  await expect(categoryLink).toBeVisible();
+  await categoryLink.click();
     await this.waitForPageLoad();
     console.log(`✓ Navigated to ${categoryName} category`);
   }
