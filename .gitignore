@@ -1,0 +1,16 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Screenshots and debug output
+screenshots/
+debug/
+
+# Local AI/browser generated metadata
+.playwright-mcp/
+.playwright/

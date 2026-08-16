@@ -1,0 +1,17 @@
+{
+  "baseUrls": {
+    "amazonHome": "https://www.amazon.com.au/",
+    "petstoreApi": "https://petstore.swagger.io/v2/"
+  },
+  "timeouts": {
+    "pageLoad": 5000,
+    "menuWait": 1000,
+    "elementVisibility": 5000
+  },
+  "screenshots": {
+    "outputDir": "screenshots",
+    "homePageVerification": "home-page-verification.png",
+    "categoryNavigation": "category-navigation.png",
+    "searchResults": "search-results.png"
+  }
+}

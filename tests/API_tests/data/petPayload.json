@@ -1,0 +1,18 @@
+{
+  "id": 0,
+  "category": {
+    "id": 1,
+    "name": "Dogs"
+  },
+  "name": "PlaceholderPet",
+  "photoUrls": [
+    "https://example.com/photos/placeholder.jpg"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "friendly"
+    }
+  ],
+  "status": "available"
+}
