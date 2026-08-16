@@ -37,11 +37,13 @@ test.describe.serial('Petstore API - Pet CRUD', () => {
     petId = Date.now();
     petName = `TestPet_${petId}`;
     const payload = buildPetPayload(petId, petName);
+    console.log('Request payload:', JSON.stringify(payload));
 
     const response = await apiContext.post('pet', { data: payload });
     expect(response.ok()).toBeTruthy();
 
     const body = await response.json();
+    console.log('Response body:', JSON.stringify(body));
     expect(body.id).toBe(petId);
     expect(body.name).toBe(petName);
   });
@@ -51,6 +53,7 @@ test.describe.serial('Petstore API - Pet CRUD', () => {
     expect(response.ok()).toBeTruthy();
 
     const body = await response.json();
+    console.log('Response body:', JSON.stringify(body));
     expect(body.id).toBe(petId);
     expect(body.name).toBe(petName);
   });
@@ -58,11 +61,13 @@ test.describe.serial('Petstore API - Pet CRUD', () => {
   test('Update a Resource - PUT /pet updates the pet name', async () => {
     const updatedName = `${petName}_Updated`;
     const payload = buildPetPayload(petId, updatedName);
+    console.log('Request payload:', JSON.stringify(payload));
 
     const response = await apiContext.put('pet', { data: payload });
     expect(response.ok()).toBeTruthy();
 
     const body = await response.json();
+    console.log('Response body:', JSON.stringify(body));
     expect(body.id).toBe(petId);
     expect(body.name).toBe(updatedName);
 
