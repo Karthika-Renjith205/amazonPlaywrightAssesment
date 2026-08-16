@@ -67,7 +67,7 @@ export class AmazonHomePage extends BasePage {
   async openNavigationMenu() {
     // Wait for the nav button to be visible and enabled before clicking
     await expect(this.navButton).toBeVisible({ timeout: 15000 });
-    await expect(this.navButton).toBeEnabled();
+    await expect(this.navButton).toBeEnabled({ timeout: 15000 });
     await this.navButton.click();
     console.log('✓ Navigation menu button clicked');
   }
