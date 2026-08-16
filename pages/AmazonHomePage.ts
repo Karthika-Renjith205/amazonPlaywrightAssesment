@@ -16,7 +16,7 @@ export class AmazonHomePage extends BasePage {
 
   constructor(page: Page) {
   super(page);
-  this.amazonLogo = page.locator('a[aria-label*="Amazon"]');
+  this.amazonLogo = page.locator('#nav-logo-sprites');
   this.searchBox = page.locator('#twotabsearchtextbox');
   this.signInLink = page.locator('#nav-link-accountList');
   this.cartLink = page.locator('#nav-cart');
