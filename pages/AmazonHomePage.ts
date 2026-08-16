@@ -19,7 +19,7 @@ export class AmazonHomePage extends BasePage {
     // Initialize locators using getByRole for accessibility
     this.amazonLogo = page.getByRole('link', { name: 'Amazon.com.au' });
     this.searchBox = page.getByRole('searchbox', { name: /search amazon/i });
-    this.signInLink = page.getByRole('link', { name: /sign in/i });
+    this.signInLink = page.locator('a[data-nav-role="signin"][data-nav-ref="nav_ya_signin"]');
     this.cartLink = page.getByRole('link', { name: /shopping basket/i });
     this.navButton = page.getByRole('button', { name: 'Open All Categories Menu' });
     this.searchbutton = page.locator('#nav-search-submit-button');
@@ -86,13 +86,14 @@ export class AmazonHomePage extends BasePage {
    * Navigate to a category
    */
   async navigateToCategory(categoryName: string) {
-  const categoryLink = this.page.getByRole('link', {
-    name: categoryName,
-    exact: true
-  });
-
-  await expect(categoryLink).toBeVisible();
-  await categoryLink.click();
+    await this.page.waitForLoadState('domcontentloaded');
+    const categoryLink = this.page.getByRole('link', {
+      name: categoryName,
+      exact: true
+    });
+    await categoryLink.scrollIntoViewIfNeeded();
+    await expect(categoryLink).toBeVisible();
+    await categoryLink.click();
     await this.waitForPageLoad();
     console.log(`✓ Navigated to ${categoryName} category`);
   }
