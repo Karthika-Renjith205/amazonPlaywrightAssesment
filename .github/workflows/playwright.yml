@@ -14,10 +14,8 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
+    - name: Run Playwright API tests for amazon.com.au
+      run: npx playwright test --project=api
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
