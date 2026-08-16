@@ -1,6 +1,6 @@
-# Playwright Test Assessment
+# Amazon Playwright Test Assessment
 
-This project contains two Playwright test suites:
+This project contains Playwright UI and API test suites for Amazon-style automation workflows and supporting API validation.
 
 - **UI tests** ([tests/UI_tests/](tests/UI_tests)) — browser-based tests against Amazon Australia (amazon.com.au), using Page Object Models in [pages/](pages).
 - **API tests** ([tests/API_tests/](tests/API_tests)) — CRUD tests against the public Petstore API (`https://petstore.swagger.io/v2/`), using Playwright's `request` context.
@@ -17,7 +17,7 @@ Shared settings (base URLs, timeouts, screenshot paths) live in [config.json](co
 1. Clone the repository and move into it:
    ```
    git clone <repo-url>
-   cd ebayPlaywrightAssesment
+   cd amazonPlaywrightAssesment
    ```
 
 2. Install dependencies:
