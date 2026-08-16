@@ -64,9 +64,9 @@ export class AmazonHomePage extends BasePage {
    * Open the navigation menu
    */
   async openNavigationMenu() {
-    // Wait for the nav JS to hydrate so the hamburger button's click handler is attached
-    await this.page.waitForLoadState('networkidle');
+    // Wait for the nav button to be visible and enabled before clicking
     await expect(this.navButton).toBeVisible();
+    await expect(this.navButton).toBeEnabled();
     await this.navButton.click();
     console.log('✓ Navigation menu button clicked');
   }

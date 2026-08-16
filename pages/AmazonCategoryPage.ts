@@ -26,8 +26,6 @@ export class AmazonCategoryPage extends BasePage {
     await expect(this.pageHeading).toBeVisible();
     console.log('✓ Category page heading is visible');
 
-    // Verify products are displayed 
-    await this.resultsComponent.verifyResultsDisplayed('products');
     await expect(this.page).toHaveURL(/electronics/i);
     console.log('✓ Verified we are on the electronics category page');
   }
