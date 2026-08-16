@@ -21,7 +21,7 @@ export class AmazonHomePage extends BasePage {
     this.searchBox = page.getByRole('searchbox', { name: /search amazon/i });
     this.signInLink = page.locator('a[data-nav-role="signin"][data-nav-ref="nav_ya_signin"]');
     this.cartLink = page.getByRole('link', { name: /shopping basket/i });
-    this.navButton = page.getByRole('button', { name: 'Open All Categories Menu' });
+    this.navButton = page.locator('#nav-hamburger-menu');
     this.searchbutton = page.locator('#nav-search-submit-button');
   }
 
@@ -66,7 +66,7 @@ export class AmazonHomePage extends BasePage {
    */
   async openNavigationMenu() {
     // Wait for the nav button to be visible and enabled before clicking
-    await expect(this.navButton).toBeVisible();
+    await expect(this.navButton).toBeVisible({ timeout: 15000 });
     await expect(this.navButton).toBeEnabled();
     await this.navButton.click();
     console.log('✓ Navigation menu button clicked');
